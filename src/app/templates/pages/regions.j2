@@ -1,0 +1,17 @@
+{% extends "layout/_layout.j2" %}
+
+{% block main %}
+  <main class="bg-gray-100 py-6">
+    <div class="bg-white p-6 shadow rounded prose lg:prose-xl">
+      <p>
+        Les membres du CNLL, région par région:
+      </p>
+
+      <ul>
+        {% for region, count in regions %}
+          <li><a href="{{ url_for(".region", region=region) }}">{{ region }}</a> ({{ count }})</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </main>
+{% endblock %}

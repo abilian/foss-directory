@@ -1,0 +1,25 @@
+{% from "macros/_card_societe.j2" import card %}
+
+<div id="result">
+  <div id="result" class="mt-8 grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 xl:gap-8">
+    {% for societe in societes %}
+      {{ card(societe) }}
+    {% endfor %}
+  </div>
+
+  <div class="flex w-full">
+    <div class="my-8 mx-auto btn-group">
+      {% if prev_page %}
+        <a href="{{ prev_page }}" class="btn">Page précédente</a>
+      {% endif %}
+
+      {#        <button class="btn">1</button>#}
+      {#        <button class="btn btn-active">2</button>#}
+      {#        <button class="btn">3</button>#}
+      {#        <button class="btn">4</button>#}
+
+      <a href="{{ next_page }}" class="btn">Page suivante</a>
+    </div>
+  </div>
+</div>
+

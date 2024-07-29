@@ -1,0 +1,52 @@
+{% macro card(societe) %}
+  <div class="card bg-white text-gray-700 rounded border border-gray-200 drop-shadow">
+    <a href="{{ url_for(".societe", siren=societe.siren) }}">
+      <h2 class="px-4 py-2 border-b border-gray-200 text-lg font-bold">{{ societe.nom }}</h2>
+
+      <figure class="border-b border-gray-200">
+        <img
+            src="{{ url_for(societe) }}/screenshot"
+            alt=""
+        >
+      </figure>
+
+      <div class="justify-end p-4 text-sm border-b border-gray-200">
+        {% if societe.description_short | length < 240 %}
+          <div class="h-36 text-base overflow-hidden">{{ societe.description_short or "" }}</div>
+        {% else %}
+          <div class="h-36 overflow-hidden">{{ societe.description_short or "" }}</div>
+        {% endif %}
+      </div>
+    </a>
+
+    <div class="justify-end text-sm p-4">
+      <div class="flex space-x-4 mb-3">
+        <span class="h-4 w-4 rounded-full text-gray-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </span>
+
+        <div class="flex-1 space-y-1">
+          <a class="badge badge-warning"
+              href="{{ url_for("ville", ville=societe.ville) }}">{{ societe.ville }}</a>
+        </div>
+      </div>
+
+      <div class="flex space-x-4">
+        <span class="h-4 w-4 text-gray-500">
+          {{ icon("user-group", class="h-6 w-6") }}
+        </span>
+        <div class="flex-1 space-y-1">
+          {% for cluster in societe.clusters %}
+            <a href="{{ url_for(cluster) }}" class="badge badge-info">{{ cluster.id }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}

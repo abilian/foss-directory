@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr" data-theme="abilian">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Annuaire du CNLL</title>
+
+  <script src="https://unpkg.com/htmx.org@1.x.x"></script>
+  <script>
+    htmx.logger = function (elt, event, data) {
+      if (console) {
+        console.log(event, elt, data);
+      }
+    }
+  </script>
+</head>
+
+<body class="ads bg-white">
+{% include "layout/_header.j2" %}
+
+<div class="bg-gray-100 border-b border-gray-300">
+  <div class="max-w-7xl mx-auto px-4 lg:px-8">
+    {% block main %}
+    {% endblock %}
+  </div>
+</div>
+
+{% include "layout/_footer.j2" %}
+
+</body>
+</html>

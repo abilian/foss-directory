@@ -1,0 +1,138 @@
+{% extends "layout/_layout.j2" %}
+
+{#{% from "_icons.j2" import icon_map %}#}
+{#{% from "_macros.j2" import key_fact %}#}
+
+{#{% set vendor = solution.vendor %}#}
+
+{% block main %}
+  <div class="bg-gray-100 border-b border-gray-300">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8">
+      <main class="bg-gray-100 py-8">
+        <div class="grid grid-cols-1 gap-6 lg:grid-flow-col-dense lg:grid-cols-3">
+          <div class="space-y-6 lg:col-start-1 lg:col-span-2">
+
+            <div class="card rounded bg-white shadow" title="Infos clefs">
+              <h2 class="card-title bg-gray-200 px-4 py-2">Caractéristiques-clefs</h2>
+
+              <div class="card-body">
+                <dl class="divide-y divide-gray-200">
+                  {% for prop in props %}
+                    <div class="py-3 flex md:grid md:grid-cols-3 md:gap-4 justify-between text-sm font-medium">
+                      <dt class="text-gray-500">{{ prop.label }}</dt>
+                      <dd class="text-gray-900 md:col-span-2">{{ prop.value }}</dd>
+                    </div>
+                  {% endfor %}
+                </dl>
+              </div>
+            </div>
+
+            <div class="card rounded bg-white shadow">
+              <h2 class="card-title bg-gray-200 px-4 py-2">Description</h2>
+
+              <div class="card-body">
+                <div>
+                  {{ solution.description }}
+                </div>
+              </div>
+            </div>
+
+            <div class="card rounded bg-white shadow">
+              <h2 class="card-title bg-gray-200 px-4 py-2">Prestataires potentiels</h2>
+
+              <div class="card-body">
+                {% for societe in prestataires %}
+                  <div>
+                    <a href="{{ url_for(societe) }}">{{ societe.nom }}</a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            {% if solution.success_cases %}
+              <div class="card rounded bg-white shadow">
+                <h2 class="card-title bg-gray-200 px-4 py-2">Success Cases</h2>
+
+                <div class="card-body">
+                  <div class="flex-col space-y-6">
+                    {% for case in solution.success_cases %}
+                      <div>
+                        <h3 class="font-bold"><a href="{{ case.success_case_url }}">
+                          {{ case.customer }}:
+                          "{{ case.title }}"</a>
+                        </h3>
+
+                        <p class="text-sm font-italic">{{ case.description }}</p>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+          </div>
+
+          <!-- col 2 -->
+          <div class="lg:col-start-3 lg:col-span-1 space-y-6">
+
+            <div class="card p-0 rounded shadow">
+              <h2 class="card-title bg-gray-200 px-4 py-2">Web Site</h2>
+
+              <div class="card-body p-0">
+                <a href="{{ solution.home_url }}">
+                  <img
+                      src="{{ url_for(solution) }}/screenshot"
+                      class="w-full"
+                      alt=""
+                  />
+                </a>
+              </div>
+            </div>
+
+            <div class="card rounded bg-white shadow">
+              <h2 class="card-title bg-gray-200 px-4 py-2">Créateur(s) / Editeur(s)</h2>
+
+              <div class="card-body">
+                En travaux...
+              </div>
+
+              {#                <dl class="divide-y divide-gray-200">#}
+              {#                  <div class="py-2 sm:py-3 sm:grid sm:grid-cols-3 sm:gap-4">#}
+              {#                    <dt class="text-gray-500">Name</dt>#}
+              {#                    <dd class="mt-1 flex text-gray-900 sm:mt-0 sm:col-span-2">#}
+              {#                      <a#}
+              {#                          class="flex-grow underline text-blue-700"#}
+              {#                          href="/vendors/{{ vendor.id }}"#}
+              {#                      >{{ vendor.title }}</a#}
+              {#                      >#}
+              {#                    </dd>#}
+              {#                  </div>#}
+              {##}
+              {#                  <div class="py-2 sm:py-3 sm:grid sm:grid-cols-3 sm:gap-4">#}
+              {#                    <dt class="text-gray-500">Year founded</dt>#}
+              {#                    <dd class="mt-1 flex text-gray-900 sm:mt-0 sm:col-span-2">#}
+              {#                      {{ vendor.founded_year }}#}
+              {#                    </dd>#}
+              {#                  </div>#}
+              {##}
+              {#                  <div class="py-2 sm:py-3 sm:grid sm:grid-cols-3 sm:gap-4">#}
+              {#                    <dt class="text-gray-500">Website</dt>#}
+              {#                    <dd class="mt-1 flex text-gray-900 sm:mt-0 sm:col-span-2">#}
+              {#                      <a#}
+              {#                          class="flex-grow underline text-blue-700"#}
+              {#                          href="{{ vendor.website_url }}"#}
+              {#                      >{{ vendor.website_url }}</a#}
+              {#                      >#}
+              {#                    </dd>#}
+              {#                  </div>#}
+              {##}
+              {#                </dl>#}
+            </div>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+{% endblock %}

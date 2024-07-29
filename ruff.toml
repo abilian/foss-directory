@@ -1,0 +1,65 @@
+exclude = []
+
+select = [
+    "F",
+    "E",
+    "C90",
+]
+
+#    "I",
+#    "UP",
+#    "N",
+#    "YTT",
+#    "B",
+#    "A",
+#    "C4",
+#    "ICN",
+#    "Q",
+#    "S",
+#    "BLE",
+#    "RET",
+#    "SIM",
+#    "TID",
+#    "RUF",
+#    "PLC", "PLE", "PLR", "PLW",
+#]
+# Add later: "ANN", "ERA"...
+
+ignore = [
+    # False positives
+    "E711", # comparison to None should be 'if cond is not None:'
+    "E712", # comparison to True should be 'if cond is True:' or 'if cond:'
+    "S101", # Use of `assert` detected
+    # ???
+    "RET505", # Unnecessary `else` after `return` statement
+    "E722", # do not use bare except
+    "E501", # Line too long
+#    "F403", # import *
+
+#    "A001", # Variable `...` is shadowing a python builtin
+#    "A002", # Argument `...` is shadowing a python builtin
+#    "A003", # Class attribute `...` is shadowing a python builtin
+#    "B019", # Use of `functools.lru_cache` or `functools.cache` on methods can lead to memory leaks
+#    "E501", # line too long
+#    "E999", # Syntax error, probably because ruff doesn't support the match statement
+#    "F401", # 'module' imported but unused\
+#    "I001", # Import block is un-sorted or un-formatted
+#    "N805", # First argument of a method should be named `self`
+#    "PLE0604", # Invalid object in `__all__`, must contain only strings
+#    "PLE1205", # Too many arguments for `logging` format string( works for Loguru)
+#    "PLR0911", # Too many return statements
+#    "RET504", # Unnecessary variable assignment before `return` statement
+#    "S311", # Standard pseudo-random generators are not suitable for cryptographic purposes
+#    "SIM108", # Use ternary operator
+#    "TID252", # Relative imports from parent modules are banned
+#    # Fixable?
+#    "BLE001", # Do not catch blind exception
+#    "PLR2004", # Magic value used in comparison
+#    "PLR5501", # use elif...
+#    "RUF001", # String contains ambiguous unicode character
+#    "RUF002", # Docstring contains ambiguous unicode character
+#    "RUF003", # Comment contains ambiguous unicode character
+#    "S105", # Possible hardcoded password
+#    "S106", # Possible hardcoded password
+#    "UP007", # Use | instead of Optional
+]

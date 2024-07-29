@@ -1,0 +1,15 @@
+{% extends "layout/_layout.j2" %}
+
+{% block main %}
+  <main class="bg-gray-100 py-8">
+    <div class="bg-white p-6 shadow rounded prose lg:prose-xl">
+      <ul>
+        {% for count, cluster in clusters %}
+          <li><a href="{{ url_for(cluster) }}/"><b>{{ cluster.id }}</b></a>
+            ({{ count }} membres)
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </main>
+{% endblock %}

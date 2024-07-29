@@ -1,0 +1,17 @@
+{% extends "layout/_layout.j2" %}
+
+{% block main %}
+  <main class="bg-gray-100 py-8">
+    <div class="bg-white p-6 shadow rounded prose lg:prose-xl">
+      <p>
+        Les membres du CNLL, ville par ville:
+      </p>
+
+      <ul>
+        {% for ville, count in villes %}
+          <li><a href="{{ url_for("ville", ville=ville) }}">{{ ville }}</a> ({{ count }})</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </main>
+{% endblock %}

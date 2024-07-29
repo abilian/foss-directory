@@ -1,0 +1,72 @@
+{% extends "layout/_layout.j2" %}
+
+{% macro card_solution(solution) %}
+  <div class="card bg-white text-gray-700 rounded border border-gray-200 drop-shadow">
+
+    <a href="{{ url_for("solution", id=solution.id) }}">
+      <h2 class="px-4 py-2 border-b border-gray-200 text-lg font-bold">{{ solution.name }}</h2>
+
+      <div class="justify-end p-4 text-sm border-b border-gray-200">
+        {% set description = solution.description_as_text %}
+        {% if description | length < 240 %}
+          <div class="h-36 text-base overflow-hidden">{{ description }}</div>
+        {% else %}
+          <div class="h-36 overflow-hidden">{{ description }}</div>
+        {% endif %}
+      </div>
+    </a>
+  </div>
+
+{% endmacro %}
+
+{% block main %}
+  <main class="bg-gray-100 pt-6">
+    <div class="mt-8">
+      <div class="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 xl:gap-8">
+        {% for solution in solutions %}
+          {{ card_solution(solution) }}
+        {% endfor %}
+
+      </div>
+    </div>
+  </main>
+{% endblock %}
+
+{#  <div>#}
+{#    <a-page-header#}
+{#      @back="back"#}
+{#      :ghost="false"#}
+{#      title="Solutions"#}
+{#      subTitle="Liste de solutions (technologies, logiciels...) maîtrisées par les membres du CNLL"#}
+{#    />#}
+{##}
+{#    <div class="inner-content">#}
+{#      <a-card>#}
+{#        <a-list#}
+{#          itemLayout="vertical"#}
+{#          size="large"#}
+{#          :pagination="pagination"#}
+{#          :dataSource="solutions"#}
+{#        >#}
+{#          <a-list-item slot="renderItem" slot-scope="item" key="item.id">#}
+{#            <h2>#}
+{#              <a href="{{ url_for(".solution", id=solution) }}">{{ item.name }}</a>#}
+{#            </h2>#}
+{##}
+{#            <div>#}
+{#              {{ item.tagline }}#}
+{#            </div>#}
+{##}
+{#            <div style="margin-top: 10px">#}
+{#              Sociétés associées:#}
+{#              <span v-for="(societe, i) in item.societes" :key="societe.siren">#}
+{#                <a :href="`/societes/${societe.siren}`">{{ societe.nom }}</a#}
+{#                ><template v-if="i == item.societes.length - 1">.</template#}
+{#                ><template v-else>,</template>&nbsp;#}
+{#              </span>#}
+{#            </div>#}
+{#          </a-list-item>#}
+{#        </a-list>#}
+{#      </a-card>#}
+{#    </div>#}
+{#  </div>#}

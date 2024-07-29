@@ -1,0 +1,12 @@
+{% extends "layout/_layout.j2" %}
+{% from "macros/_card_societe.j2" import card %}
+
+{% block main %}
+  <main class="bg-gray-100 py-10">
+    <div class="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 xl:gap-8">
+      {% for societe in societes %}
+        {{ card(societe) }}
+      {% endfor %}
+    </div>
+  </main>
+{% endblock %}

@@ -1,0 +1,15 @@
+<div xmlns:meld="http://www.w3.org/1999/xhtml">
+  <h1>Search for a user in a database</h1>
+
+  <input meld:model="search" type="text" placeholder="Search for name">
+
+  <p>Search matches <span class="underline">{{ societes|length }}</span> societes</p>
+
+  <ul class="grid">
+    {% for societe in societes %}
+      <li class="card">
+        <h3>{{ societe.nom }}</h3>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

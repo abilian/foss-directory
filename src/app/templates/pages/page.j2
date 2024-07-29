@@ -1,0 +1,20 @@
+{% extends "layout/_layout.j2" %}
+
+{% block main %}
+  <main class="bg-white p-4 lg:p-8 prose xl:prose-lg mx-auto">
+    <a-page-header
+        :title="title"
+        :ghost="false"
+        :subTitle="subtitle"
+        class="page-header"
+    />
+
+    <h1>{{ title }}</h1>
+
+    <div class="">
+      <a-card>
+        {{ body }}
+      </a-card>
+    </div>
+  </main>
+{% endblock %}

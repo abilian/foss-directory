@@ -1,0 +1,89 @@
+/* Config for DaisyUI */
+:root {
+    --rounded-box: 0.25rem; /* border-radius for cards and other big elements */
+    --rounded-btn: 0.25rem; /* border-radius for buttons and similar elements */
+    --rounded-badge: 1rem; /* border-radius for badge and other small elements */
+
+    --animation-btn: 0.25s; /* bounce animation time for button */
+    --animation-input: 0.2s; /* bounce animation time for checkbox, toggle, etc */
+
+    --padding-card: 1rem; /* default card-body padding */
+
+    --btn-text-case: uppercase; /* default text case for buttons */
+    --navbar-padding: 0.5rem; /* default padding for navbar */
+    --border-btn: 1px; /* default border size for button */
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Prose overrides */
+@layer components {
+    .prose h1 {
+        @apply text-gray-800 text-3xl;
+    }
+
+    .prose h2 {
+        @apply text-gray-800 italic text-xl;
+    }
+
+    .prose p {
+        line-height: 1.5;
+    }
+}
+
+@layer components {
+    .card {
+        @apply rounded-box;
+
+        &:focus-visible {
+            box-shadow: 0 0 0 2px currentColor;
+        }
+
+        &.bordered {
+            @apply border border-base-200;
+        }
+
+        &-bordered {
+            @apply border border-base-200;
+        }
+
+        &.compact {
+            .card-body {
+                @apply p-4 text-sm;
+            }
+
+            .card-title {
+                @apply mb-1;
+            }
+        }
+
+        &-body {
+            @apply text-gray-600;
+            padding: var(--padding-card, 2rem);
+        }
+
+        &-title {
+            @apply mb-3 text-lg font-semibold;
+        }
+
+        &-actions:first-child {
+            @apply mb-2;
+        }
+
+        &-actions:last-child {
+            @apply mt-6;
+        }
+
+        &.image-full {
+            &:before {
+                @apply bg-neutral z-10 opacity-75 rounded-box;
+            }
+        }
+
+        &.image-full > &-body {
+            @apply text-neutral-content z-20;
+        }
+    }
+}

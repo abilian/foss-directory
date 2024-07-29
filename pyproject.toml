@@ -1,0 +1,190 @@
+[tool.poetry]
+name = "annuaire-cnll"
+version = "1.0"
+description = ""
+authors = ["Abilian SAS"]
+packages = [{ include = "app", from = "src" }]
+include = ["src/**/*", "vendor/**/*"]
+
+[tool.poetry.dependencies]
+python = "~3.10"
+
+# Pinned for now
+flask = "*"
+werkzeug = "*"
+
+# Front-end / Webapp
+flask-admin = "*"
+flask-basicauth = "*"
+flask-caching = "*"
+flask-cors = "*"
+flask-migrate = "*"
+flask-tailwind = "*"
+blinker = "*"
+marshmallow = "*"
+mistune = "*"
+pagic = { path = "vendor/pagic", develop = true }
+pydantic = "*"
+python-dotenv = "*"
+sentry_sdk = "*"
+webargs = "*"
+
+# flask-meld = "*"
+# pagic = { git = "git@github.com:abilian/pagic.git", branch = "main", develop = true }
+# pagic = "0.2.1"
+# flask-tailwind = "0.1.7"
+# flask-tailwind = {path = "vendor/flask-tailwind", develop = true}
+
+# ORM
+flask-sqlalchemy = "*"
+sqlalchemy = "*"
+sqlalchemy-utils = "*"
+psycopg2 = "*"
+
+# Functional libs
+ramda = "*"
+pyfunctional = "*"
+immutables = "*"
+
+# Ach libs
+loguru = "*"
+svcs = "*"
+
+# Back-end / jobs / AI
+click = "*"
+airtable-python-wrapper = "*"
+beautifulsoup4 = "*"
+cssselect = "*"
+dictdiffer = "*"
+france-naf = "*"
+glom = "*"
+httpx = "*"
+hyperlink = "*"
+ijson = "*"
+lxml = "*"
+openpyxl = "*"
+python-slugify = "*"
+pytz = "*"
+shot-scraper = "*"
+sqlalchemy-json = "*"
+tldextract = "*"
+tqdm = "*"
+trafilatura = "*"
+uuid7 = "*"
+wikidata = "*"
+wptools = "*"
+xlrd = "*"
+yarl = "*"
+
+# NLP/AI
+nltk = "*"
+langid = "*"
+spacy = "*"
+spacy-lookups-data = "*"
+textrazor = "*"
+
+# Accès au stockage S3
+boto3 = "*"
+requests = "*"
+# httpx = "*"
+
+# Debug
+devtools = "*"
+rich = "*"
+snoop = "*"
+
+# Prod
+circus = "*"
+gunicorn = "*"
+
+[tool.poetry.dev-dependencies]
+abilian-devtools = "*"
+
+# Waiting for a new release
+# flask-debugtoolbar = "*"
+
+# Devops
+#chaussette = "*"
+fabric = "*"
+honcho = "1.1.0"
+
+# Typing
+types-python-dateutil = "*"
+types-pytz = "*"
+types-requests = "*"
+
+# pyanalyze = "*"
+# dephell = "*"
+# Needed because otherwise poetry installs dephell 0.0.1 !
+# fissix = { version = "*", allow-prereleases = true }
+pre-commit = "*"
+tox = "*"
+
+# Testing
+pytest-mock = "3.7.0"
+pytest-randomly = "*"
+behaving = "*"
+flask-linktester = "0.3.0"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+
+
+# -----------------------------------------------------------------------------
+
+[tool.deptry]
+ignore_obsolete = [
+    # Used (implicitely) by Flask-Login (I think)
+    "bcrypt",
+    "zxcvbn",
+    # Used (implicitely) by Flask (I think)
+    "python-dotenv",
+    # Used (implicitely) by BS4
+    "lxml",
+    # Not used but may be used
+    "sourcetypes",
+    # Used (bug of deptry?
+    "psycopg2",
+    "opencv-python",
+    "gunicorn",
+    # Used by scripts
+    "pijnu",
+]
+ignore_missing = [
+    "app",
+    "mediawiki_parser",
+    "pkg_resources",
+    "watchgod",
+]
+ignore_transitive = [
+    # FIXME later
+    "alembic",
+]
+exclude = [
+    '.tox', 'tests', 'sandbox', 'doc', 'scripts', "dodo.py",
+    "tasks.py", "icons/tasks.py",
+]
+
+# -----------------------------------------------------------------------------
+
+[tool.pyright]
+exclude = [
+    '.nox',
+    'tests',
+    'sandbox',
+    'doc',
+    'scripts',
+    'tmp',
+    "src/app/modules/superadmin",
+]
+include = ["src"]
+
+# False positives
+reportPrivateImportUsage = false
+reportOptionalSubscript = false
+reportGeneralTypeIssues = false

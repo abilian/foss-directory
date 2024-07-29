@@ -1,0 +1,18 @@
+<html lang="fr">
+<body>
+<h2>Stats</h2>
+
+<p>Nombre total de sociétés actives: {{ count }}</p>
+
+<h2>Sites web down</h2>
+
+<ul>
+  {% for societe in societes %}
+    {% if societe.site_web_down %}
+      <li><a href="{{ societe.site_web }}">{{ societe.nom }}</a></li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+</body>
+</html>

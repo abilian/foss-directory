@@ -1,0 +1,50 @@
+{% extends "layout/_layout.j2" %}
+{% from "macros/_card_societe.j2" import card %}
+
+{% block main %}
+  <main class="bg-gray-100 pt-6">
+    <form
+        hx-get="/"
+        hx-target="#result"
+        hx-swap="outerHTML"
+        hx-trigger="change"
+        class="flex justify-between bg-white p-4 rounded border border-gray-200 drop-shadow">
+
+      <div class="flex items-baseline">
+        <span class="mr-4">Région:</span>
+        <select name="region" class="select select-bordered" hx-trigger="change">
+          {% for region in regions %}
+            {% if region.selected %}
+              {% set selected = "selected" %}
+            {% else %}
+              {% set selected = "" %}
+            {% endif %}
+            <option value="{{ region.label }}" {{ selected }}>{{ region.label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="flex items-baseline">
+        <span class="mr-4">Métier:</span>
+        <select name="metier" class="select select-bordered" hx-trigger="changes">
+          {% for metier in metiers %}
+            {% if metier.selected %}
+              {% set selected = "selected" %}
+            {% else %}
+              {% set selected = "" %}
+            {% endif %}
+            <option value="{{ metier.label }}" {{ selected }}>{{ metier.label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="">
+        <span class="mr-4">Chercher:</span>
+        <input type="text" name="q" value="" class="input input-bordered" hx-trigger="keyup changed delay:500ms">
+      </div>
+    </form>
+
+    {% include "pages/home--list.j2" %}
+
+  </main>
+{% endblock %}

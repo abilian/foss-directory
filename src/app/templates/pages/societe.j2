@@ -1,0 +1,180 @@
+{% extends "layout/_layout.j2" %}
+
+{% block main %}
+  <main class="bg-gray-100 py-8">
+    <div
+        class="grid grid-cols-1 gap-6 lg:grid-flow-col-dense lg:grid-cols-3">
+
+      {# col 1 #}
+      <div class="space-y-6 lg:col-start-1 lg:col-span-2">
+
+        <div class="card bg-white shadow">
+          <div class="card-body">
+            <h2 class="card-title">
+              Description
+            </h2>
+            {{ societe.description }}
+          </div>
+        </div>
+
+        <div class="card bg-white shadow" title="Infos clefs">
+          <div class="card-body">
+            <h2 class="card-title">
+              Infos clefs
+            </h2>
+
+            <dl class="divide-y divide-gray-200">
+              <div class="py-2 sm:py-3 sm:grid sm:grid-cols-3 sm:gap-4">
+                <dt class="text-gray-500">
+                  Site web
+                </dt>
+                <dd class="mt-1 flex text-gray-900 sm:mt-0 sm:col-span-2">
+                  <a class="flex-grow underline text-blue-700" href="{{ societe.site_web }}">{{ societe.site_web }}</a>
+                </dd>
+              </div>
+
+              <div class="py-2 sm:py-3 sm:grid sm:grid-cols-3 sm:gap-4">
+                <dt class="text-gray-500">
+                  Effectifs
+                </dt>
+                <dd class="mt-1 flex text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{ societe.effectifs }}
+                </dd>
+              </div>
+
+              <div class="py-2 sm:py-3 sm:grid sm:grid-cols-3 sm:gap-4">
+                <dt class="text-gray-500">
+                  Numéro SIREN
+                </dt>
+                <dd class="mt-1 flex text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{ societe.siren }}
+                </dd>
+              </div>
+
+
+              <div class="py-2 sm:py-3 sm:grid sm:grid-cols-3 sm:gap-4">
+                <dt class="text-gray-500">
+                  Code NAF
+                </dt>
+                <dd class="mt-1 flex text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{ societe.naf_code }} - {{ societe.naf_libelle }}
+                </dd>
+              </div>
+
+              {% if societe.date_creation %}
+                <div class="py-2 sm:py-3 sm:grid sm:grid-cols-3 sm:gap-4">
+                  <dt class="text-gray-500">
+                    Date de création
+                  </dt>
+                  <dd class="mt-1 flex text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{ societe.date_creation }}
+                  </dd>
+                </div>
+              {% endif %}
+
+              {% if societe.tagline %}
+                <div class="py-2 sm:py-3 sm:grid sm:grid-cols-3 sm:gap-4">
+                  <dt class="text-gray-500">
+                    Tag line
+                  </dt>
+                  <dd class="mt-1 flex text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{ societe.tagline }}
+                  </dd>
+                </div>
+              {% endif %}
+
+              <div class="py-2 sm:py-3 sm:grid sm:grid-cols-3 sm:gap-4">
+                <dt class="text-gray-500">
+                  Cluster(s) d'appartenance
+                </dt>
+                <dd class="mt-1 flex text-gray-900 sm:mt-0 sm:col-span-2">
+                  <div class="flex-1 space-y-1">
+                    {% for cluster in societe.clusters %}
+                      <a href="{{ url_for(cluster) }}" class="badge badge-info">{{ cluster.id }}</a>
+                    {% endfor %}
+                  </div>
+                </dd>
+              </div>
+
+            </dl>
+          </div>
+        </div>
+
+        <div class="card bg-white shadow">
+          <div class="card-body">
+            <h2 class="card-title">
+              Solutions et technologies
+            </h2>
+
+            <div>
+              {% for solution in solutions %}
+                <span class="badge badge-primary">
+                  <a href="{{ url_for(solution) }}">{{ solution.name }}</a>
+                </span>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        {#        {% if societe.insee %}#}
+        {#          <div class="card bg-white shadow">#}
+        {#            <div class="card-body">#}
+        {#              <h2 class="card-title">#}
+        {#                Plus d'infos#}
+        {#              </h2>#}
+        {#              {% for k, v in societe.insee.items() %}#}
+        {#                <p>{{ k }}: {{ v }}</p>#}
+        {#              {% endfor %}#}
+        {#            </div>#}
+        {#          </div>#}
+        {#        {% endif %}#}
+      </div>
+
+      {# col 2 #}
+      <div class="lg:col-start-3 lg:col-span-1 space-y-6">
+
+        <div class="card p-0 rounded shadow">
+          <div class="card-body p-0">
+            <a href="{{ societe.site_web }}">
+              <img
+                  src="{{ url_for(societe) }}/screenshot"
+                  style="width: 100%"
+                  alt=""
+              />
+            </a>
+          </div>
+        </div>
+
+        <div class="card bg-white shadow">
+          <div class="card-body">
+            <h2 class="card-title">
+              Etablissements
+            </h2>
+
+            <ul>
+              {% for etablissement in etablissements %}
+                <li class="mt-2">
+                  <span>
+                  {{ icon("map", style="outline", class="inline h-5 w-5 mr-4 text-gray-400") }}
+
+                  {{ etablissement.adresse }},
+                  <a href="/villes/{{ etablissement.ville }}"
+                    class="hover:underline">{{ etablissement.ville }}</a>,
+                  <a href="/regions/{{ etablissement.region }}"
+                    class="hover:underline">{{ etablissement.region }}</a>
+                  </span>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        {#        <div class="card p-0">#}
+        {#          <client-only>#}
+        {#            <mini-map :etablissements="societe.etablissements"></mini-map>#}
+        {#          </client-only>#}
+        {#        </div>#}
+      </div>
+    </div>
+  </main>
+{% endblock %}
